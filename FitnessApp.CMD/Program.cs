@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.InteropServices;
+using FitnessApp.BL.Controller;
+
 
 namespace FitnessApp.CMD
 {
@@ -10,6 +9,24 @@ namespace FitnessApp.CMD
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Привет дружище, Я приложение для фитнесса");
+            Console.WriteLine("Пожалуйста, введите ваше имя: ");
+            var name = Console.ReadLine();
+
+            Console.WriteLine("Введите пол: ");
+            var gender = Console.ReadLine();
+
+            Console.WriteLine("Введите дату рождения: ");
+            var birthday = DateTime.Parse(Console.ReadLine());//TODO: переписать
+
+            Console.WriteLine("Введите вес: ");
+            var weight = double.Parse(Console.ReadLine());
+
+            Console.WriteLine("Введите рост: ");
+            var height = double.Parse(Console.ReadLine());
+
+            var userController = new UserController(name, gender, birthday, weight, height);
+            userController.Save();
         }
     }
 }

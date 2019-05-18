@@ -4,11 +4,12 @@ using System.Data;
 
 namespace FitnessApp.BL.Model
 {
+    [Serializable]
     #region Свойства
     /// <summary>
     /// Наш пользователь
     /// </summary>
-    class User
+    public class User
     {
         /// <summary>
         /// Имя.
