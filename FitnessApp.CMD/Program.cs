@@ -7,26 +7,69 @@ namespace FitnessApp.CMD
 {
     class Program
     {
+        private static double value;
+
         static void Main(string[] args)
         {
-            Console.WriteLine("Привет дружище, Я приложение для фитнесса");
-            Console.WriteLine("Пожалуйста, введите ваше имя: ");
+            Console.WriteLine("Привет дружище, Я приложение для фитнесса !");
+            Console.WriteLine("Пожалуйста, введите имя пользователя: ");
             var name = Console.ReadLine();
 
-            Console.WriteLine("Введите пол: ");
-            var gender = Console.ReadLine();
+           var userController = new UserController(name);
+           if (userController.IsNewUser)
+           {
+               Console.Write("Введите пол: ");
+               var gender = Console.ReadLine();
+               var birthDate = ParseDateTime("дата рождения");
+               var weight = ParseDouble("вес");
+               var height = ParseDouble("рост");
+            
+                userController.SetNewUserData(gender, birthDate, weight, height);
+           }
+           Console.WriteLine(userController.CurrentUser);
+           Console.ReadLine();
 
-            Console.WriteLine("Введите дату рождения: ");
-            var birthday = DateTime.Parse(Console.ReadLine());//TODO: переписать
+        }
 
-            Console.WriteLine("Введите вес: ");
-            var weight = double.Parse(Console.ReadLine());
+        private static DateTime ParseDateTime(string value)
+        {
+            DateTime birthDate;
+            while (true)
+            {
+                Console.Write($"Введите {value}(dd.MM.yyy): ");
+               
+                if (DateTime.TryParse(Console.ReadLine(), out birthDate))
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine($"Неверный формат {value} ");
+                }
+                
+            }
 
-            Console.WriteLine("Введите рост: ");
-            var height = double.Parse(Console.ReadLine());
+            return birthDate;
 
-            var userController = new UserController(name, gender, birthday, weight, height);
-            userController.Save();
+        }
+
+        private static double ParseDouble(string name)
+        {
+
+
+            while (true)
+            {
+                Console.Write($"Введите {name}: ");
+                if (double.TryParse(Console.ReadLine(), out value))
+                {
+                    return value;
+                }
+                else
+                {
+                    Console.WriteLine($"Неверный формат поля {name}а ");
+                }
+
+            }
         }
     }
 }
