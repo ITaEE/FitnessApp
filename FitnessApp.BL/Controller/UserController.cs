@@ -12,8 +12,9 @@ namespace FitnessApp.BL.Controller
     /// <summary>
     /// Контроллер пользователя
     /// </summary>
-    public class UserController
+    public class UserController: ControllerBase
     {
+        private const string USER_FILE_NAME = "users.dat";
         /// <summary>
         /// Пользователь приложения
         /// </summary>
@@ -33,9 +34,13 @@ namespace FitnessApp.BL.Controller
             {
                 throw new ArgumentNullException("Имя пользователя не может быть пустым", nameof(userName));
             }
-            Users = GetUsersData();
+
+           
+            //Users = GetUsersData();
         
             CurrentUser = Users.SingleOrDefault(u => u.Name == userName);
+
+            
 
             if (CurrentUser == null)
             {
@@ -49,26 +54,10 @@ namespace FitnessApp.BL.Controller
         /// Получить сохраненный список пользователей
         /// </summary>
         /// <returns>Пользователей.</returns>
-        private List<User> GetUsersData()
-        {
-
-            var formatter = new BinaryFormatter();
-            using (var fs = new FileStream("users.dat", FileMode.OpenOrCreate))
-            {
-
-                List<User> users = null;
-                if (fs.Length > 0 && formatter.Deserialize(fs) is  List<User>)
-                {
-                    return users;
-                }
-                else
-                {
-                    return new List<User>();
-                }
-
-             }
-
-           }
+        //private List<User> GetUsersData()
+        //{
+        //    return Load<User>() ?? new List<User>;                                    
+        //}
 
         public void SetNewUserData(string genderName, DateTime birthDate, double weight = 1, double height = 1)
         {
@@ -85,11 +74,7 @@ namespace FitnessApp.BL.Controller
         /// </summary>
         public void Save()
         {
-            var formatter = new BinaryFormatter();
-            using (var fs = new FileStream("users.dat", FileMode.OpenOrCreate))
-            {
-                formatter.Serialize(fs, Users);
-            }
+            Save(USER_FILE_NAME, Users);
         }
         
 

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using FitnessApp.BL.Controller;
+using FitnessApp.BL.Model;
+using System.Resources;
+using System.Globalization;
 
 
 namespace FitnessApp.CMD
@@ -27,9 +30,27 @@ namespace FitnessApp.CMD
                 userController.SetNewUserData(gender, birthDate, weight, height);
            }
            Console.WriteLine(userController.CurrentUser);
+
+           Console.WriteLine("Что вы хотите сделать ? ");
+           Console.WriteLine("E - ввести приём пищи ");
+           var key = Console.ReadKey();
+           if (key.Key == ConsoleKey.E)
+           {
+               //EnterEating();
+           }
+               
            Console.ReadLine();
 
         }
+
+        //private static (Food, double) EnterEating()
+        //{
+        //    Console.WriteLine("Введите имя продукта: ");
+        //    var food = Console.ReadLine();
+    
+        //    var weight = ParseDouble("вес порции");
+
+        //}
 
         private static DateTime ParseDateTime(string value)
         {
