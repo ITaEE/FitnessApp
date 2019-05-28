@@ -17,12 +17,7 @@ namespace FitnessApp.BL.Controller
 
         public EatingController(User user)
         {
-            if (user == null)
-            {
-                throw new ArgumentNullException("Пользователь не может быть пустым.", nameof(user));
-            }
-
-            this.user = user;
+            this.user = user ?? throw new ArgumentNullException("Пользователь не может быть пустым.", nameof(user));
             Foods = GetAllFoods();
             Eating = GetEating();
         }
@@ -47,26 +42,12 @@ namespace FitnessApp.BL.Controller
 
         private Eating GetEating()
         {
-            if (Load<Eating>(EATINGS_FILE_NAME) == null)
-            {
-                throw new ArgumentNullException();
-            }
-            else
-            {
-                return new Eating(user);
-            }
+            return Load<Eating>(EATINGS_FILE_NAME) ?? new Eating(user);
         }
 
         private List<Food> GetAllFoods()
         {
-            if (Load<List<Food>>(FOODS_FILE_NAME) == null)
-            {
-                throw new ArgumentNullException();
-            }
-            else
-            {
-                return new List<Food>();
-            }
+            return Load<List<Food>>(FOODS_FILE_NAME) ?? new List<Food>();
         }
 
         private void Save()

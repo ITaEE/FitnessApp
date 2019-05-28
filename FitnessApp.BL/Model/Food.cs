@@ -12,11 +12,11 @@ namespace FitnessApp.BL.Model
         /// <summary>
         /// Имя продукта
         /// </summary>
-        public string Name { get; }
+        public string Name { get; set; }
         /// <summary>
         /// Белки
         /// </summary>
-        public double Proteins { get; }
+        public double Proteins { get; set; }
         /// <summary>
         /// Жиры
         /// </summary>
@@ -24,13 +24,13 @@ namespace FitnessApp.BL.Model
         /// <summary>
         /// Углеводы
         /// </summary>
-        public double Carbohydrates { get; }
+        public double Carbohydrates { get; set; }
         /// <summary>
         /// Калории
         /// </summary>
-        public double Calories { get; }
+        public double Calories { get; set; }
 
-     
+        public Food() { }
 
         public Food(string name):this(name, 0, 0, 0, 0) { }
         

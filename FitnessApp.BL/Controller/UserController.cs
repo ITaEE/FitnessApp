@@ -36,7 +36,7 @@ namespace FitnessApp.BL.Controller
             }
 
            
-            //Users = GetUsersData();
+            Users = GetUsersData();
         
             CurrentUser = Users.SingleOrDefault(u => u.Name == userName);
 
@@ -47,17 +47,17 @@ namespace FitnessApp.BL.Controller
                 CurrentUser = new User(userName);
                 Users.Add(CurrentUser);
                 IsNewUser = true;
-                //Save();
+                Save();
             }
         }
         /// <summary>
         /// Получить сохраненный список пользователей
         /// </summary>
         /// <returns>Пользователей.</returns>
-        //private List<User> GetUsersData()
-        //{
-        //    return Load<User>() ?? new List<User>;                                    
-        //}
+        private List<User> GetUsersData()
+        {
+            return Load<List<User>>(USER_FILE_NAME) ?? new List<User>();
+        }
 
         public void SetNewUserData(string genderName, DateTime birthDate, double weight = 1, double height = 1)
         {

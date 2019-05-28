@@ -22,8 +22,8 @@ namespace FitnessApp.BL.Controller
             using (var fs = new FileStream(fileName, FileMode.OpenOrCreate))
             {
 
-                T items = default(T);
-                if (fs.Length > 0 && formatter.Deserialize(fs) is T )
+               
+                if (fs.Length > 0 && formatter.Deserialize(fs) is T items )
                 {
                     return items;
                 }
