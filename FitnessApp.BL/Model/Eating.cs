@@ -12,20 +12,19 @@ namespace FitnessApp.BL.Model
     /// </summary>
     public class Eating
     {
-        public DateTime Moment { get; }
+        public DateTime Moment { get; set; }
 
-        public Dictionary<Food, double> Foods { get; }
+        public Dictionary<Food, double> Foods { get; set; }
 
         public User User { get; }
 
+        public Eating() { }
+
         public Eating(User user)
         {
-            if (user == null)
-            {
-                throw new ArgumentNullException("Имя пользователя не может быть пустым", nameof(user));
-            }
 
-            User = user;
+
+            User = user ?? throw new ArgumentNullException("Пользователь не может быть пустым.", nameof(user));
             Moment=DateTime.UtcNow;
             Foods = new Dictionary<Food, double>();
         }

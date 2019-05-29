@@ -14,15 +14,17 @@ namespace FitnessApp.CMD
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Привет дружище, Я приложение для фитнесса !");
-            Console.WriteLine("Пожалуйста, введите имя пользователя: ");
+            var culture = CultureInfo.CreateSpecificCulture("de-de");
+            var resourceManager = new ResourceManager("FitnessApp.CMD.Languages.Message", typeof(Program).Assembly); 
+            Console.WriteLine(resourceManager.GetString("HelloFriend", culture));
+            Console.WriteLine(resourceManager.GetString("EnterName", culture));
             var name = Console.ReadLine();
 
             var userController = new UserController(name);
             var eatingController = new EatingController(userController.CurrentUser);
             if (userController.IsNewUser)
             {
-                Console.Write("Введите пол: ");
+                Console.Write(resourceManager.GetString("EnterGender", culture));
                 var gender = Console.ReadLine();
                 var birthDate = ParseDateTime("дата рождения");
                 var weight = ParseDouble("вес");

@@ -34,7 +34,7 @@ namespace FitnessApp.BL.Model
 
         public Food(string name):this(name, 0, 0, 0, 0) { }
         
-           public Food(string name, double proteins, double fats, double carbohydrates, double calories)
+           public Food(string name, double calories, double proteins, double fats, double carbohydrates)
         {
             //TODO: Проверка
             Name = name;
